@@ -73,8 +73,8 @@ app.post('/api/photos', function(req, res) {
 	console.dir(req.files);
 	res.send('Upload complete');
 
-	var imagePath = '/uploads/' + req.files.name;
-
+	var imagePath = './uploads/' + req.files.files.name;
+	console.log(imagePath);
 	try {
 		ocrsdk.processImage(imagePath, settings, uploadCompleted);
 
