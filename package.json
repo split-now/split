@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Repo for Split",
   "main": "main.js",
-  "scripts": { },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/split-now/split.git"
@@ -16,6 +16,7 @@
   "homepage": "https://github.com/split-now/split#readme",
   "dependencies": {
     "express": "^4.12.3",
-    "multer": "^0.1.8"
+    "multer": "^0.1.8",
+    "xml2js": "^0.4.8"
   }
 }
