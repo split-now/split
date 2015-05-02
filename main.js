@@ -10,7 +10,7 @@ app.get('/', function (req, res) {
 });
 
 app.post('/api/photos', function(req, res) {
-    console.log(JSON.stringify(req.files));
+  console.dir(req.files);
 });
 
 var server = app.listen(3000, function () {
