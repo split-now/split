@@ -83,6 +83,11 @@ app.post('/api/photos', function(req, res) {
 	}
 });
 
+app.get('/showmethemoney', function(req, res){
+	console.log("Hello World");	
+	});
+
+
 var server = app.listen(3000, function() {
 
 	var host = server.address().address;
@@ -93,9 +98,3 @@ var server = app.listen(3000, function() {
 });
 
 
-app.get('/showmethemoney', function(req, res){
-	console.log("Hello World");
-	});
-
-var server = app.listen(3000, function () {
-});
