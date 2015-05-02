@@ -13,7 +13,7 @@ var password = 'oIGLZOt09upQa/x8O/mHIKU/';
 
 var ocrsdkModule = require('./ocrsdk.js');
 var ocrsdk = ocrsdkModule.create(appId, password);
-ocrsdk.serverUrl = "http://cloud.ocrsdk.com"; 
+ocrsdk.serverUrl = "http://cloud.ocrsdk.com";
 
 function downloadCompleted(error) {
 	if (error) {
@@ -60,7 +60,7 @@ function uploadCompleted(error, taskData) {
 }
 
 var settings = new ocrsdkModule.ProcessingSettings();
-settings.language = "English"; 
+settings.language = "English";
 settings.exportFormat = "txt";
 
 
@@ -83,6 +83,11 @@ app.post('/api/photos', function(req, res) {
 	}
 });
 
+app.get('/showmethemoney', function(req, res){
+	console.log("Hello World");	
+	});
+
+
 var server = app.listen(3000, function() {
 
 	var host = server.address().address;
@@ -91,7 +96,5 @@ var server = app.listen(3000, function() {
 	console.log('Example app listening at http://%s:%s', host, port);
 
 });
-
-
 
 
