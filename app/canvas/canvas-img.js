@@ -18,17 +18,17 @@ function drawRect() {
   canvas.height = HEIGHT;
 
   function init() {
-    canvas.addEventListener("touchstart", handleTouch, false);
-    canvas.addEventListener("touchmove", handleTouch, false);
-    canvas.addEventListener("touchleave", handleEnd, false);
-    canvas.addEventListener("touchend", handleEnd, false);
+    canvas.addEventListener('touchstart', handleTouch, false);
+    canvas.addEventListener('touchmove', handleTouch, false);
+    canvas.addEventListener('touchleave', handleEnd, false);
+    canvas.addEventListener('touchend', handleEnd, false);
   }
 
   function handleTouch(event) {
     if (event.targetTouches.length === 1) {
       touch = event.targetTouches[0];
 
-      if (event.type == "touchmove") {
+      if (event.type == 'touchmove') {
         if (drag) {
           rect.w = touch.pageX - rect.startX;
           rect.h = touch.pageY - rect.startY ;
@@ -48,13 +48,13 @@ function drawRect() {
 
   function draw() {
     drawImageOnCanvas();
-    ctx.fillStyle = "rgba(0, 100, 255, 0.2)";
+    ctx.fillStyle = 'rgba(0, 100, 255, 0.2)';
     ctx.fillRect(rect.startX, rect.startY, rect.w, rect.h);
-  }
+  } // We can stick a callback here for image processing
 
   function drawImageOnCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //canvas.drawImage(imgPhoto,0,0,imgClientWidth,imgClientHeight);
+    // canvas.drawImage(imgPhoto,0,0,imgClientWidth,imgClientHeight);
   }
 
   init();
