@@ -95,6 +95,15 @@ app.get('/nexmo', function(req, res) {
 	res.send('Nexmo');
 });
 
+app.get('/charge', function(req, res){
+	nexmo.sendTextMessage('12532715412', '13472608289', 'Hi Tim, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
+	nexmo.sendTextMessage('12532715412', '12153173289', 'Hi Joe, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
+	nexmo.sendTextMessage('12532715412', '14154703689', 'Hi Demian, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
+	nexmo.sendTextMessage('12532715412', '14255912367', 'Hi Justin, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
+	nexmo.sendTextMessage('12532715412', '16302023624', 'Hi Cassidy, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
+});
+
+
 // user act as a receiver
 // user act as a master
 
@@ -117,7 +126,7 @@ var users = [{
 	phone: '12153173289',
 	name: 'Joseph Song'
 }, {
-	username: 'Justin-woo-1',
+	username: 'jw',
 	phone: '14255912367',
 	name: 'Justin Woo'
 }]
