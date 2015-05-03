@@ -117,7 +117,7 @@ app.get('/nexmo', function(req, res) {
 	res.send('Nexmo');
 });
 
-<<<<<<< HEAD
+
 // app.get('/charge', function(req, res) {
 // 	for (var i = 0; i < users.length; i++) {
 // 		if (req.body.username === )
@@ -127,24 +127,7 @@ app.get('/nexmo', function(req, res) {
 // 	// nexmo.sendTextMessage('12532715412', '13472608289', 'Hi Tim, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
 // 	// nexmo.sendTextMessage('12532715412', '13472608289', 'Hi Tim, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
 // });
-=======
-app.get('/charge', function(req, res){
-	nexmo.sendTextMessage('12532715412', '13472608289', 'Hi Tim, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
-	nexmo.sendTextMessage('12532715412', '12153173289', 'Hi Joe, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
-	nexmo.sendTextMessage('12532715412', '14154703689', 'Hi Demian, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
-	nexmo.sendTextMessage('12532715412', '14255912367', 'Hi Justin, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
-	nexmo.sendTextMessage('12532715412', '16302023624', 'Hi Cassidy, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
-});
->>>>>>> 62e9b0f9cdb585391eac7f88d50830494e6806a6
 
-
-// user act as a receiver
-// user act as a master
-
-//flicks, notify all people 
-// charges everyone
-<<<<<<< HEAD
-=======
 var users = [{
 	username: 'timotius',
 	phone: '13472608289',
@@ -166,7 +149,6 @@ var users = [{
 	phone: '14255912367',
 	name: 'Justin Woo'
 }]
->>>>>>> 62e9b0f9cdb585391eac7f88d50830494e6806a6
 
 
 io.on('connection', function(socket) {
