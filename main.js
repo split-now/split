@@ -85,21 +85,28 @@ var friends = [];
 io.on('connection', function(socket) {
 
 	socket.on('master', function(data) {
+		console.log(data.username);
 		socket.emit('master', {
-			masterID: data.venmoID
+			username: data.username
 		});
 	});
 
 	socket.on('flicked', function(data) { // data  = {venmoID: id}
 		socket.emit('flicked-response', {
-			venmoID: data.venmoID
+			username: data.username
 		});
 	});
 
 	socket.on('login', function(data){
 		friends.push(data.username);
 		console.log(data.username);
-		socket.emit('update-friends', {
+		socket.emit('login-confirm', {
+			friends: friends
+		});
+	});
+
+	socket.on('update-friends', function(data){
+		socket.emit('new-friends', {
 			friends: friends
 		});
 	});
