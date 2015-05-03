@@ -124,6 +124,16 @@ angular.module('split.controllers', ['split.services'])
   })
 
   .controller('PayCtrl', function ($scope) {
+
+    $scope.chargeFriends = function () {
+
+    };
+
+    $scope.payMainBill = function () {
+      console.log('test');
+      window.open('http://104.245.38.179:3000/showmethemoney', 'mastercard');
+    };
+
   });
 
 
