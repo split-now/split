@@ -53,7 +53,7 @@ $(function() {
 
   function draw() {
     drawImageOnCanvas();
-    ctx.strokeStyle = "green";
+    ctx.strokeStyle = 'green';
     ctx.strokeRect(rect.startX, rect.startY, rect.w, rect.h);
     ctx.fillStyle = 'rgba(0, 100, 255, 0.1)';
     ctx.fillRect(rect.startX, rect.startY, rect.w, rect.h);

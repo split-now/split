@@ -1,0 +1,28 @@
+<!--
+Create tabs with an icon and label, using the tabs-positive style.
+Each tab's child <ion-nav-view> directive will have its own
+navigation history that also transitions its views in and out.
+-->
+<ion-tabs class="tabs-icon-top tabs-color-active-royal">
+
+  <!-- Login Tab -->
+  <ion-tab title="Start a SPLIT" icon-off="ion-arrow-expand" icon-on="ion-arrow-expand" href="#/tab/login">
+    <ion-nav-view name="tab-login"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Find Friends Tab -->
+  <ion-tab title="Find Friends" icon-off="ion-search" icon-on="ion-search" href="#/tab/findfriends">
+    <ion-nav-view name="tab-find-friends"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Scan Receipt Tab -->
+  <ion-tab title="Scan Receipt" icon-off="ion-document-text" icon-on="ion-document-text " href="#/tab/scanreceipt">
+    <ion-nav-view name="tab-scan-receipt"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Pay Tab -->
+  <ion-tab title="Pay" icon-off="ion-cash" icon-on="ion-cash" href="#/tab/pay">
+    <ion-nav-view name="tab-pay"></ion-nav-view>
+  </ion-tab>
+
+</ion-tabs>

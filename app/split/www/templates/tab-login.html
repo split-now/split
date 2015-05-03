@@ -1,0 +1,80 @@
+<ion-view view-title="Welcome to SPLIT">
+  <ion-content class="padding">
+
+    <div class="card" ng-if="!isLoggedIn">
+      <div class="item item-divider">Step 1: Login with your Venmo Account</div>
+      <div class="item item-body">
+        <div>
+          <form ng-submit="doLogin(username)">
+            <div class="list">
+              <label class="item item-input">
+                <span class="input-label">Username</span>
+                <input type="text" ng-model="username">
+              </label>
+              <label class="item item-input">
+                <span class="input-label">Password</span>
+                <input type="password" ng-model="password">
+              </label>
+              <label class="item">
+                <button class="button button-block button-royal" type="submit">Log in</button>
+              </label>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="isLoggedIn">
+
+      <div class="card">
+        <div class="item item-body">
+          <div>
+            Welcome <b>{{ currentUserName }}</b>!
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="item item-divider">Step 1: Start a SPLIT</div>
+        <div class="item item-body">
+          <div>
+            Tap on the button below and start a <b>SPLIT</b> with your friends.
+            <p>Once you tap on the button below, you will become the <b>MANAGER</b> of your SPLIT process.</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="button button-block button-royal" ng-click="startSplit()">
+        Start a SPLIT
+      </button>
+
+      <div class="card">
+        <div class="item item-divider">Step 2: Find Friends</div>
+        <div class="item item-body">
+          <div>
+            You will find and select your friends to become <b>CONTRIBUTORS</b> in your SPLIT process.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="item item-divider">Step 3: Scan Receipt</div>
+        <div class="item item-body">
+          <div>
+            You will take a picture of a receipt and will share the parts with your friends.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="item item-divider">Step 4: Pay</div>
+        <div class="item item-body">
+          <div>
+            You will receive all payments from your friends and will be able to pay the bill with your Credit Card.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

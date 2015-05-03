@@ -1,0 +1,26 @@
+<ion-view view-title="Find Friends">
+  <ion-content class="padding">
+
+    <div class="card">
+      <div class="item item-divider">{{friends.length}} friends found!</div>
+      <div class="item item-body">
+        <div>
+          <form ng-submit="selectFriends()">
+            <div class="list">
+              <label class="item item-body">
+                Select the friends you want to become <b>CONTRIBUTORS</b> to this <b>SPLIT</b>:
+              </label>
+              <label class="item" ng-repeat="friend in friends">
+                <ion-checkbox ng-model="item.checked" ng-checked="false" ng-change="sendSMS(friend, item)">{{friend.name}}</ion-checkbox>
+              </label>
+              <label class="item">
+                <button class="button button-block button-royal" type="submit">Select Friends</button>
+              </label>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>
