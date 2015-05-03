@@ -93,7 +93,7 @@ io.on('connection', function(socket) {
 
 	socket.on('master', function(data) {
 		console.log("master: " + data.username);
-		socket.emit('master', {
+		io.sockets.emit('master', {
 			username: data.username
 		});
 	});
@@ -113,7 +113,7 @@ io.on('connection', function(socket) {
 	});
 
 	socket.on('update-friends', function(data){
-		socket.emit('new-friends', {
+		io.sockets.emit('new-friends', {
 			friends: friends
 		});
 	});
