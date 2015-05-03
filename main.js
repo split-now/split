@@ -117,6 +117,15 @@ io.on('connection', function(socket) {
 			friends: friends
 		});
 	});
+
+	socket.on('logout', function(data){
+		for(var i = 0; i < friends.length; i++){
+			if(friends[i] === data.username){
+				friends = friends.splice(i, 1);
+				break;
+			}
+		}
+	})
 });
 
 
