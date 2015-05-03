@@ -2,16 +2,13 @@
 
 var WIDTH = window.innerWidth;
 var HEIGHT = window.innerHeight;
+var imgArr = [];
 
 $(function() {
-  drawRect();
-});
-
-function drawRect() {
   var canvas = document.getElementById('receipt');
   var ctx = canvas.getContext('2d');
   var drag = false;
-  var imageObj;
+  var imgObj;
   var rect = { };
   var touch;
 
@@ -19,10 +16,10 @@ function drawRect() {
   canvas.height = HEIGHT;
 
   function init() {
-    imageObj = new Image();
-    imageObj.src = 'img.jpg';
-    imageObj.onload = function() {
-      ctx.drawImage(imageObj, 0, 0);
+    imgObj = new Image();
+    imgObj.src = 'img.jpg';
+    imgObj.onload = function() {
+      ctx.drawImage(imgObj, 0, 0);
     };
 
     canvas.addEventListener('touchstart', handleTouch, false);
@@ -51,7 +48,7 @@ function drawRect() {
 
   function handleEnd(event) {
     drag = false;
-    saveRegion(imageObj);
+    saveRegion(imgObj);
   }
 
   function draw() {
@@ -60,11 +57,11 @@ function drawRect() {
     ctx.strokeRect(rect.startX, rect.startY, rect.w, rect.h);
     ctx.fillStyle = 'rgba(0, 100, 255, 0.1)';
     ctx.fillRect(rect.startX, rect.startY, rect.w, rect.h);
-  } // We can stick a callback here for image processing
+  }
 
   function drawImageOnCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(imageObj, 0, 0);
+    ctx.drawImage(imgObj, 0, 0);
   }
 
   function saveRegion(img) {
@@ -75,8 +72,9 @@ function drawRect() {
     canvas.height = rect.h;
     ctx.drawImage(img, rect.startX, rect.startY, rect.w, rect.h, 0, 0, rect.w, rect.h);
 
-    console.log(canvas.toDataURL());
+    imgArr.push(canvas.toDataURL());
+    console.log(imgArr);
   }
 
   init();
-}
+});
