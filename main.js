@@ -53,12 +53,12 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
 }));
 
 // request.post('https://api.venmo.com/v1/oauth/access_token', { 
-	var formData = {
+var formData = {
 		client_id: '2595',
 		code: 'casidoo',
 		client_secret: '23BB5tf8ajMhdEEtASz65r9QpYqySfnx',
 	}
-// });
+	// });
 var access_token;
 // request.post({url:'https://api.venmo.com/v1/oauth/access_token', formData: formData}, function (err, httpResponse, body) {
 //   if (err) {
@@ -72,7 +72,7 @@ app.get('/', function(req, res) {
 	res.send('Hello World!');
 });
 
-app.post('/api/photos', function(req, res) { //req must have username  and user id
+app.post('/api/photos', function(req, res) { //req must have username 
 	console.dir(req.files);
 	res.send('Upload complete');
 
@@ -87,11 +87,11 @@ app.post('/api/photos', function(req, res) { //req must have username  and user 
 			var amount = parseFloat(str[0].substring(0, str[0].length - 1));
 
 			console.log(amount);
-			
-			charges.push({
-				username: req.body.username,
-				amount: amount
-			});
+
+			for (var i = 0; i < charges.length; i++) {
+				if (charges[i].username === req.body.username)
+					charges.amount += amount;
+			}
 		}
 	});
 });
@@ -117,12 +117,15 @@ app.get('/nexmo', function(req, res) {
 	res.send('Nexmo');
 });
 
-app.get('/charge', function(req, res){
-	nexmo.sendTextMessage('12532715412', '13472608289', 'Hi Tim, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
-	nexmo.sendTextMessage('12532715412', '13472608289', 'Hi Tim, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
-	nexmo.sendTextMessage('12532715412', '13472608289', 'Hi Tim, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
-	nexmo.sendTextMessage('12532715412', '13472608289', 'Hi Tim, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
-});
+// app.get('/charge', function(req, res) {
+// 	for (var i = 0; i < users.length; i++) {
+// 		if (req.body.username === )
+// 	}
+// 	nexmo.sendTextMessage('12532715412', phone, 'Hi ' + req.body.username + ', your Venmo account has been charged $' + amount, '', console.log('Hi Tim, Your Venmo account has been charged $15'));
+// 	// nexmo.sendTextMessage('12532715412', '13472608289', 'Hi Tim, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
+// 	// nexmo.sendTextMessage('12532715412', '13472608289', 'Hi Tim, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
+// 	// nexmo.sendTextMessage('12532715412', '13472608289', 'Hi Tim, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
+// });
 
 
 // user act as a receiver
@@ -134,6 +137,8 @@ app.get('/charge', function(req, res){
 
 io.on('connection', function(socket) {
 
+
+
 	socket.on('master', function(data) {
 		console.log("master: " + data.username);
 		io.sockets.emit('master', {
@@ -141,11 +146,62 @@ io.on('connection', function(socket) {
 		});
 	});
 
-	socket.on('flicked', function(data) { // data  = {venmoID: id}
-		socket.emit('flicked-response', {
-			username: data.username
-		});
+	socket.on('charge', function(data) { // data  = {}
+		var data = charges[i];
+		for (var i = 0; i < charges.length; i++) {
+			nexmo.sendTextMessage('12532715412', data.phone, 'Hi ' + data.username + ', your Venmo account has been charged $' + amount, '', console.log('Hi ' + data.username + ', Your Venmo account has been charged $15'));
+		}
+
 	});
+
+	// socket.on('flick', function(data) {
+	// 	var addData = function(username, phone) {
+	// 		charges.push({
+	// 			username: username,
+	// 			phone: phone,
+	// 			amount: 0
+
+	// 		});
+
+	// 	}
+
+	// 	for (var i = 0; i < users.length; i++) {
+	// 		if (users[i].username === data.username) {
+	// 			var phone = users[i].phone;
+	// 			addData(data.username, phone);
+	// 		}
+	// 	}
+
+	// });
+
+	socket.on('flicked', function(data){
+		var phone;
+		for (var i = 0; i < users.length; i++) {
+			if (users[i].username === data.username) {
+				phone = users[i].phone;
+			}
+		}
+		nexmo.sendTextMessage('12532715412', phone, 'Hi ' + data.username + ', your Venmo account has been charged.', '', console.log('Hi, Your Venmo account has been charged'));
+	});
+
+	socket.on('ice tea', function(data){
+		io.sockets.emit('item', {
+			username: 'cassidoo',
+			amount: '3.99'
+		});
+
+		nexmo.sendTextMessage('12532715412', '16302023624', 'Hi Cassidy, your Venmo account has been charged $3.99.', '', console.log('Hi, Your Venmo account has been charged'));
+	});
+
+	socket.on('calamari', function(data){
+		io.sockets.emit('item',{
+			username: 'jw',
+			amount: '10.79'
+		});
+
+		nexmo.sendTextMessage('12532715412', '14255912367', 'Hi Justin, your Venmo account has been charged $10.79.', '', console.log('Hi, Your Venmo account has been charged'));
+	})
+
 
 	socket.on('login', function(data) {
 		var success = function() {
