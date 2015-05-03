@@ -143,6 +143,7 @@ io.on('connection', function(socket) {
 		var success = function() {
 			console.log(data.username);
 			console.log(friends[friends.length - 1].phone);
+			console.log(friends[friends.length - 1].name);
 
 			io.sockets.emit('new-friends', {
 				friends: friends
