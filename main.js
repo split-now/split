@@ -14,27 +14,7 @@ var bodyParser = require('body-parser');
 
 nexmo.initialize('0b3f7f9c', '6ea51cfd', 'http', 'true');
 
-var users = [{
-	username: 'timotius',
-	phone: '13472608289',
-	name: 'Timotius Sitorus'
-}, {
-	username: 'demianborba',
-	phone: '14154703689',
-	name: 'Demian Borba'
-}, {
-	username: 'cassidoo',
-	phone: '16302023624',
-	name: 'Cassidy Williams'
-}, {
-	username: 'ijoosong',
-	phone: '12153173289',
-	name: 'Joseph Song'
-}, {
-	username: 'Justin-woo-1',
-	phone: '14255912367',
-	name: 'Justin Woo'
-}]
+var users = [];
 
 var friends = [];
 
@@ -53,11 +33,7 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
 }));
 
 // request.post('https://api.venmo.com/v1/oauth/access_token', { 
-var formData = {
-		client_id: '2595',
-		code: 'casidoo',
-		client_secret: '23BB5tf8ajMhdEEtASz65r9QpYqySfnx',
-	}
+var formData = {};
 	// });
 var access_token;
 // request.post({url:'https://api.venmo.com/v1/oauth/access_token', formData: formData}, function (err, httpResponse, body) {
@@ -118,37 +94,7 @@ app.get('/nexmo', function(req, res) {
 });
 
 
-// app.get('/charge', function(req, res) {
-// 	for (var i = 0; i < users.length; i++) {
-// 		if (req.body.username === )
-// 	}
-// 	nexmo.sendTextMessage('12532715412', phone, 'Hi ' + req.body.username + ', your Venmo account has been charged $' + amount, '', console.log('Hi Tim, Your Venmo account has been charged $15'));
-// 	// nexmo.sendTextMessage('12532715412', '13472608289', 'Hi Tim, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
-// 	// nexmo.sendTextMessage('12532715412', '13472608289', 'Hi Tim, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
-// 	// nexmo.sendTextMessage('12532715412', '13472608289', 'Hi Tim, your Venmo account has been charged $15', '', console.log('Hi Tim, Your Venmo account has been charged $15'));
-// });
-
-var users = [{
-	username: 'timotius',
-	phone: '13472608289',
-	name: 'Timotius Sitorus'
-}, {
-	username: 'demianborba',
-	phone: '14154703689',
-	name: 'Demian Borba'
-}, {
-	username: 'cassidoo',
-	phone: '16302023624',
-	name: 'Cassidy Williams'
-}, {
-	username: 'ijoosong',
-	phone: '12153173289',
-	name: 'Joseph Song'
-}, {
-	username: 'jw',
-	phone: '14255912367',
-	name: 'Justin Woo'
-}]
+var users = [];
 
 
 io.on('connection', function(socket) {
