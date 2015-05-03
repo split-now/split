@@ -27,20 +27,20 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
 }));
 
 // request.post('https://api.venmo.com/v1/oauth/access_token', { 
-	var formData = function() {
+	var formData = {
 		client_id: '2595',
 		code: 'casidoo',
 		client_secret: '23BB5tf8ajMhdEEtASz65r9QpYqySfnx',
 	}
 // });
 var access_token;
-request.post({url:'https://api.venmo.com/v1/oauth/access_token', formData: formData}, function (err, httpResponse, body) {
-  if (err) {
-    return console.error('upload failed:', err);
-  }
-  console.log('Upload successful!  Server responded with:', body);
-  access_token = body.access_token;
-});
+// request.post({url:'https://api.venmo.com/v1/oauth/access_token', formData: formData}, function (err, httpResponse, body) {
+//   if (err) {
+//     return console.error('upload failed:', err);
+//   }
+//   console.log('Upload successful!  Server responded with:', body);
+//   access_token = body.access_token;
+// });
 
 app.get('/', function(req, res) {
 	res.send('Hello World!');
