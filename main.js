@@ -92,7 +92,7 @@ var friends = [];
 io.on('connection', function(socket) {
 
 	socket.on('master', function(data) {
-		console.log("master: "data.username);
+		console.log("master: " + data.username);
 		socket.emit('master', {
 			username: data.username
 		});
