@@ -1,11 +1,6 @@
 # split :banana:
-Repo for Split
 
-
-Adding stuff here
-
-testint testing tesint
-
+![Split](/images/split.png)
 
 http://104.245.38.179:3000/
 
