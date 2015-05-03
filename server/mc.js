@@ -1,7 +1,6 @@
 var Simplify = require("simplify-commerce"),
     client = Simplify.getClient({
-	publicKey: 'sbpb_M2E1Mjc2YTAtOGRlMy00NjBkLWE2MDktOTM3NTVkM2JjMDU4',
-	privateKey: 'os1RKeIxPkTpZmhQuPWNFd5E/1RcY+OjXS+fL6XjwXJ5YFFQL0ODSXAOkNtXTToq'
+	publicKey: 'sbpb_M2E1Mjc2YTAtOGRlMy00NjBkLWE2MDktOTM3NTVkM2JjMDU4'
     });
 
 client.payment.create({

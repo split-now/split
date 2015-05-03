@@ -16,4 +16,4 @@ I can then swipe or flick each item to their respective buyer and consolidate an
 
 Once all the charges are distributed, the final payment can be made to the establishment through the Mastercard API.
 
-This was built for TechCrunch Disrupt in 24 hours with no sleep.  So expect hacky code.
+[This was built for TechCrunch Disrupt in 24 hours with no sleep.](http://techcrunch.com/2015/05/03/split-lets-you-split-the-bill-fairly-not-equally/)  So expect hacky code.
