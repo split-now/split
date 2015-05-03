@@ -127,7 +127,7 @@ io.on('connection', function(socket) {
 	});
 
 	socket.on('login', function(data) {
-		for (int i = 0; i < users.length; i++) {
+		for (var i = 0; i < users.length; i++) {
 			if(users[i].username === data.username){
 				friends.push(users[i]);
 				break;
