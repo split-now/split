@@ -14,6 +14,32 @@ var bodyParser = require('body-parser');
 
 nexmo.initialize('0b3f7f9c', '6ea51cfd', 'http', 'true');
 
+var users = [{
+	username: 'timotius',
+	phone: '13472608289',
+	name: 'Timotius Sitorus'
+}, {
+	username: 'demianborba',
+	phone: '14154703689',
+	name: 'Demian Borba'
+}, {
+	username: 'cassidoo',
+	phone: '16302023624',
+	name: 'Cassidy Williams'
+}, {
+	username: 'ijoosong',
+	phone: '12153173289',
+	name: 'Joseph Song'
+}, {
+	username: 'Justin-woo-1',
+	phone: '14255912367',
+	name: 'Justin Woo'
+}]
+
+var friends = [];
+
+var charges = [];
+
 app.set('view engine', 'ejs');
 
 app.use(multer({
@@ -46,7 +72,7 @@ app.get('/', function(req, res) {
 	res.send('Hello World!');
 });
 
-app.post('/api/photos', function(req, res) { //req must have venmo access token  and user id
+app.post('/api/photos', function(req, res) { //req must have username  and user id
 	console.dir(req.files);
 	res.send('Upload complete');
 
@@ -61,15 +87,11 @@ app.post('/api/photos', function(req, res) { //req must have venmo access token 
 			var amount = parseFloat(str[0].substring(0, str[0].length - 1));
 
 			console.log(amount);
-			request.post('https://api.venmo.com/v1/payments', {
-				form: {
-					access_token: 'ac0bf130d8f00a7e90ca73c3021469f6182dd6ecf24c1b81c865421f695ea26c',
-					user_id: 'casidoo',
-					note: 'Thanks for using Split™',
-					amount: amount
-				}
+			
+			charges.push({
+				username: req.body.username,
+				amount: amount
 			});
-
 		}
 	});
 });
@@ -100,29 +122,7 @@ app.get('/nexmo', function(req, res) {
 
 //flicks, notify all people 
 // charges everyone
-var users = [{
-	username: 'timotius',
-	phone: '13472608289',
-	name: 'Timotius Sitorus'
-}, {
-	username: 'demianborba',
-	phone: '14154703689',
-	name: 'Demian Borba'
-}, {
-	username: 'cassidoo',
-	phone: '16302023624',
-	name: 'Cassidy Williams'
-}, {
-	username: 'ijoosong',
-	phone: '12153173289',
-	name: 'Joseph Song'
-}, {
-	username: 'Justin-woo-1',
-	phone: '14255912367',
-	name: 'Justin Woo'
-}]
 
-var friends = [];
 
 io.on('connection', function(socket) {
 
