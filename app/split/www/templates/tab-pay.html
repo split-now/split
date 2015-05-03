@@ -1,12 +1,36 @@
 <ion-view view-title="Pay">
   <ion-content class="padding">
-    <div class="list card">
-      <div class="item item-divider">Pay</div>
+
+    <div class="card">
+      <div class="item item-divider">Charge Friends</div>
       <div class="item item-body">
         <div>
-          There is a fire in <b>sector 3</b>
+          Total to be collected from friends: <b>$15.00</b>
         </div>
       </div>
+      <div class="item item-body">
+        <button class="button button-block button-royal" ng-click="chargeFriends()">
+          Charge Friends
+        </button>
+      </div>
     </div>
+
+
+    <div class="card">
+      <div class="item item-divider">Pay Main Bill with Mastercard</div>
+      <div class="item item-body">
+        <div>
+          Total to be collected from friends: <b>$120.00</b>
+        </div>
+      </div>
+      <div class="item item-body">
+        <button class="button button-block button-royal" ng-click="payMainBill()">
+          Pay Main Bill
+        </button>
+      </div>
+    </div>
+
+
+
   </ion-content>
 </ion-view>
