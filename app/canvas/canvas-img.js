@@ -10,14 +10,22 @@ $(function() {
 function drawRect() {
   var canvas = document.getElementById('receipt');
   var ctx = canvas.getContext('2d');
-  var rect = { };
   var drag = false;
+  var imageObj;
+  var rect = { };
   var touch;
 
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
 
   function init() {
+    imageObj = new Image();
+
+    imageObj.src = 'img.jpg';
+    imageObj.onload = function() {
+      ctx.drawImage(imageObj, 0, 0);
+    };
+
     canvas.addEventListener('touchstart', handleTouch, false);
     canvas.addEventListener('touchmove', handleTouch, false);
     canvas.addEventListener('touchleave', handleEnd, false);
@@ -54,7 +62,7 @@ function drawRect() {
 
   function drawImageOnCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // canvas.drawImage(imgPhoto,0,0,imgClientWidth,imgClientHeight);
+    ctx.drawImage(imageObj, 0, 0);
   }
 
   init();
