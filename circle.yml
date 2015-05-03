@@ -1,0 +1,5 @@
+deployment:
+  production:
+    branch: master
+    commands:
+      - ssh maya@104.245.38.179 "cd split && git pull origin master"
