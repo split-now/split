@@ -98,6 +98,7 @@ io.on('connection', function(socket) {
 
 	socket.on('login', function(data){
 		friends.push(data.username);
+		console.log(data.username);
 		socket.emit('update-friends', function(){
 			friends: friends;
 		});
