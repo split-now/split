@@ -7,6 +7,11 @@ var io = require('socket.io')(server);
 
 var tesseract = require('node-tesseract');
 
+var nexmo = require('easynexmo');
+
+nexmo.initialize('0b3f7f9c','6ea51cfd','http','true');
+
+app.set('view engine', 'ejs');
 
 app.use(multer({
 	dest: './uploads/'
@@ -29,15 +34,24 @@ app.post('/api/photos', function(req, res) {
 			console.error(err);
 		} else {
 			var str = text.match(/(\d+\.\d+)\s/g);
-
 			console.log(parseFloat(str[0].substring(0, str[0].length - 1)) + 0.01);
 		}
 	});
+
+app.get('/showmethemoney', function(req, res){
+	console.log("Hello World");	
+	res.render('index');
 });
 
-app.get('/showmethemoney', function(req, res) {
-	console.log("Hello World");
+app.get('/nexmo', function(req, res){
+	var tel = req.param('tel');
+	var msg = req.param('msg');
+ 	//nexmo.sendTextMessage('12532715412','14255912367','Helllo I love Nexmo!', '', console.log('Nexmo sent!'));	
+ 	nexmo.sendTextMessage('12532715412', tel, msg, '', console.log('Nexmo sent!'));	
+	console.log("Nexmo sent!!");	
+	res.send('Nexmo');
 });
+
 // user act as a receiver
 // user act as a master
 

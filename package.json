@@ -15,6 +15,7 @@
   },
   "homepage": "https://github.com/split-now/split#readme",
   "dependencies": {
+    "easynexmo": "^0.6.2",
     "express": "^4.12.3",
     "multer": "^0.1.8",
     "node-tesseract": "^0.2.6",
