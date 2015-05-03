@@ -3,5 +3,5 @@ Imagine we just received our bill.  We all open this app and the person who will
 selects "Start Split." This allows the user to see their nearby venmo friends to select from and begin their
 transaction process.  Once I select the friends I've eaten with, I take a picture of the receipt
 and segment it by dragging rectangles around each item.  I then swipe or flick each item to their
-respective buyer and consolidate an overall charge each person.  Once all the charges are distributed, the 
-final payment can be made and the establishment paid for their services.  
+respective buyer and consolidate an overall charge for each person.  Once all the charges are distributed, the 
+final payment can be made and the establishment paid for their services using Mastercard API.  
