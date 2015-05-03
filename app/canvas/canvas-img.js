@@ -20,7 +20,6 @@ function drawRect() {
 
   function init() {
     imageObj = new Image();
-
     imageObj.src = 'img.jpg';
     imageObj.onload = function() {
       ctx.drawImage(imageObj, 0, 0);
@@ -52,17 +51,31 @@ function drawRect() {
 
   function handleEnd(event) {
     drag = false;
+    saveRegion(imageObj);
   }
 
   function draw() {
     drawImageOnCanvas();
-    ctx.fillStyle = 'rgba(0, 100, 255, 0.2)';
+    ctx.strokeStyle = "green";
+    ctx.strokeRect(rect.startX, rect.startY, rect.w, rect.h);
+    ctx.fillStyle = 'rgba(0, 100, 255, 0.1)';
     ctx.fillRect(rect.startX, rect.startY, rect.w, rect.h);
   } // We can stick a callback here for image processing
 
   function drawImageOnCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(imageObj, 0, 0);
+  }
+
+  function saveRegion(img) {
+    var canvas = document.createElement("canvas"),
+    ctx = canvas.getContext("2d");
+
+    canvas.width = rect.w;
+    canvas.height = rect.h;
+    ctx.drawImage(img, rect.startX, rect.startY, rect.w, rect.h, 0, 0, rect.w, rect.h);
+
+    console.log(canvas.toDataURL());
   }
 
   init();
