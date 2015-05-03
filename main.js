@@ -8,6 +8,9 @@ var io = require('socket.io')(server);
 var tesseract = require('node-tesseract');
 
 var nexmo = require('easynexmo');
+var request = require('request');
+
+var bodyParser = require('body-parser');
 
 nexmo.initialize('0b3f7f9c', '6ea51cfd', 'http', 'true');
 
@@ -18,11 +21,16 @@ app.use(multer({
 }))
 
 
+app.use(bodyParser.json()); // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
+	extended: true
+}));
+
 app.get('/', function(req, res) {
 	res.send('Hello World!');
 });
 
-app.post('/api/photos', function(req, res) {
+app.post('/api/photos', function(req, res) { //req must have venmo access token  and user id
 	console.dir(req.files);
 	res.send('Upload complete');
 
@@ -32,9 +40,22 @@ app.post('/api/photos', function(req, res) {
 	tesseract.process(__dirname + imagePath, function(err, text) {
 		if (err) {
 			console.error(err);
-		} else {
+		} 
+
+		else {
 			var str = text.match(/(\d+\.\d+)\s/g);
-			console.log(parseFloat(str[0].substring(0, str[0].length - 1)));
+			var amount = parseFloat(str[0].substring(0, str[0].length - 1));
+
+			console.log(amount);
+			request.post('https://api.venmo.com/v1/payments', { 
+				form: {
+					access_token: 'ac0bf130d8f00a7e90ca73c3021469f6182dd6ecf24c1b81c865421f695ea26c',
+					user_id: 'casidoo',
+					note: 'Thanks for using Split™',
+					amount: amount
+				}
+			});
+
 		}
 	});
 });
@@ -59,6 +80,8 @@ app.get('/nexmo', function(req, res) {
 //flicks, notify all people 
 // charges everyone
 
+var friends = [];
+
 io.on('connection', function(socket) {
 
 	socket.on('master', function(data) {
@@ -69,11 +92,16 @@ io.on('connection', function(socket) {
 
 	socket.on('flicked', function(data) { // data  = {venmoID: id}
 		socket.emit('flicked-response', {
-			masterID: data.venmoID
+			venmoID: data.venmoID
 		});
 	});
 
-
+	socket.on('login', function(data){
+		friends.push(data.username);
+		socket.emit('update-friends', function(){
+			friends: friends;
+		});
+	});
 });
 
 
