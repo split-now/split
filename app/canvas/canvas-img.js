@@ -47,11 +47,14 @@ function drawRect() {
   }
 
   function draw() {
-      ctx.lineWidth="4";
-      ctx.strokeStyle="green";
+    drawImageOnCanvas();
     ctx.fillStyle = "rgba(0, 100, 255, 0.2)";
     ctx.fillRect(rect.startX, rect.startY, rect.w, rect.h);
-    ctx.stroke();
+  }
+
+  function drawImageOnCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //canvas.drawImage(imgPhoto,0,0,imgClientWidth,imgClientHeight);
   }
 
   init();
