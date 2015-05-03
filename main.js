@@ -127,18 +127,25 @@ io.on('connection', function(socket) {
 	});
 
 	socket.on('login', function(data) {
-		for (var i = 0; i < users.length; i++) {
-			if(users[i].username === data.username){
-				friends.push(users[i]);
-				break;
-			}
-		}
-		console.log(data.username);
-		console.log(friends[friends.length -1].phone); 
+		var success = function() {
+			console.log(data.username);
+			console.log(friends[friends.length - 1].phone);
 
-		io.sockets.emit('new-friends', {
-			friends: friends
-		});
+			io.sockets.emit('new-friends', {
+				friends: friends
+			});
+		}
+		
+		for (var i = 0; i < users.length; i++) {
+			if (users[i].username === data.username) {
+				friends.push(users[i]);
+				success();
+			}
+
+			if (i == users.length)
+				console.log("invalid username");
+		}
+
 	});
 
 
