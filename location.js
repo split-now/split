@@ -37,13 +37,17 @@ require([
     markerSymbol.setColor(new Color([255, 255, 0, 0.5]));
     
     g.setSymbol = markerSymbol;
-    g.setAttributes( {"FriendID": "ijoosong", "Name": "joseph"}, 
-      {"FriendID": "cassidoo", "Name": "cassidy"},
-      {"FriendID": "timotius", "Name": "timotius"});
+    g.setAttributes( {"FriendID": "ijoosong", "Name": "joseph"});
+    featLayer.applyEdits([g], null, null, doSuccess, doError);
+    g.setAttributes({"FriendID": "cassidoo", "Name": "cassidy"});
+    featLayer.applyEdits([g], null, null, doSuccess, doError);
+    g.setAttributes({"FriendID": "timotius", "Name": "timotius"});
     featLayer.applyEdits([g], null, null, doSuccess, doError);
     //spatial queries and attribute queries.
     //combined
     
   }
   save();
+  
+  
 });
