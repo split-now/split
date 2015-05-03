@@ -60,6 +60,13 @@ app.post('/api/photos', function(req, res) { //req must have venmo access token 
 	});
 });
 
+app.post('/upload', function(req, res) { 
+	console.dir(req.files);
+	res.send('Upload complete');
+
+});
+
+
 app.get('/showmethemoney', function(req, res) {
 	console.log("Hello World");
 	res.render('index');
