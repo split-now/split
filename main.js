@@ -126,7 +126,7 @@ var users = [{
 	phone: '12153173289',
 	name: 'Joseph Song'
 }, {
-	username: 'Justin-woo-1',
+	username: 'jw',
 	phone: '14255912367',
 	name: 'Justin Woo'
 }]
