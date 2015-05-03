@@ -26,6 +26,14 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
 	extended: true
 }));
 
+// request.post('https://api.venmo.com/v1/oauth/access_token', { 
+// 	form: {
+// 		client_id: 'ac0bf130d8f00a7e90ca73c3021469f6182dd6ecf24c1b81c865421f695ea26c',
+// 		code: 'casidoo',
+// 		client_secret: '23BB5tf8ajMhdEEtASz65r9QpYqySfnx',
+// 	}
+// });
+
 app.get('/', function(req, res) {
 	res.send('Hello World!');
 });
@@ -40,14 +48,12 @@ app.post('/api/photos', function(req, res) { //req must have venmo access token 
 	tesseract.process(__dirname + imagePath, function(err, text) {
 		if (err) {
 			console.error(err);
-		} 
-
-		else {
+		} else {
 			var str = text.match(/(\d+\.\d+)\s/g);
 			var amount = parseFloat(str[0].substring(0, str[0].length - 1));
 
 			console.log(amount);
-			request.post('https://api.venmo.com/v1/payments', { 
+			request.post('https://api.venmo.com/v1/payments', {
 				form: {
 					access_token: 'ac0bf130d8f00a7e90ca73c3021469f6182dd6ecf24c1b81c865421f695ea26c',
 					user_id: 'casidoo',
@@ -60,7 +66,7 @@ app.post('/api/photos', function(req, res) { //req must have venmo access token 
 	});
 });
 
-app.post('/upload', function(req, res) { 
+app.post('/upload', function(req, res) {
 	console.dir(req.files);
 	res.send('Upload complete');
 
@@ -86,6 +92,22 @@ app.get('/nexmo', function(req, res) {
 
 //flicks, notify all people 
 // charges everyone
+var users = [{
+	username: 'timotius',
+	phone: '13472608289'
+}, {
+	username: 'demianborba',
+	phone: '14154703689'
+}, {
+	username: 'cassidoo',
+	phone: '16302023624'
+}, {
+	username: 'ijoosong',
+	phone: '12153173289'
+}, {
+	username: 'Justin-woo-1',
+	phone: '14255912367'
+}]
 
 var friends = [];
 
@@ -104,23 +126,26 @@ io.on('connection', function(socket) {
 		});
 	});
 
-	socket.on('login', function(data){
-		friends.push(data.username);
+	socket.on('login', function(data) {
+		for (int i = 0; i < users.length; i++) {
+			if(users[i].username === data.username){
+				friends.push(users[i]);
+				break;
+			}
+		}
 		console.log(data.username);
-		socket.emit('login-confirm', {
-			friends: friends
-		});
-	});
+		console.log(friends[friends.length -1].phone); 
 
-	socket.on('update-friends', function(data){
 		io.sockets.emit('new-friends', {
 			friends: friends
 		});
 	});
 
-	socket.on('logout', function(data){
-		for(var i = 0; i < friends.length; i++){
-			if(friends[i] === data.username){
+
+
+	socket.on('logout', function(data) {
+		for (var i = 0; i < friends.length; i++) {
+			if (friends[i].username === data.username) {
 				friends = friends.splice(i, 1);
 				break;
 			}
