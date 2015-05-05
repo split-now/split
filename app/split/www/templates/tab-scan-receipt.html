@@ -1,13 +1,27 @@
 <ion-view view-title="Scan Receipt">
-  <ion-content class="padding">
+  <ion-content class="padding" scroll="false">
     <div class="list">
       <label class="item">
-        <button class="button button-full button-royal" ng-click="scanReceipt()">
-          Scan Receipt
-        </button>
+        <div>
+          <div class="wrapper">
+            <div id="single1" class="container" ng-show="isListVisible">
+              <div id="tea">Iced Tea - $3.99</div>
+              <div id="fish">Calamari - $10.79</div>
+            </div>
+          </div>
+        </div>
+        <canvas id="receipt-image" ng-show="!isListVisible">
+        </canvas>
       </label>
-      <canvas id="receipt-image">
-      </canvas>
     </div>
   </ion-content>
+  <ion-footer-bar align-title="left" class="bar-royal">
+    <div class="buttons" ng-click="doneScanning()">
+      <button class="button">Done Scanning</button>
+    </div>
+    <h1 class="title"></h1>
+    <div class="buttons" ng-click="scanReceipt()">
+      <button class="button">New Scan</button>
+    </div>
+  </ion-footer-bar>
 </ion-view>

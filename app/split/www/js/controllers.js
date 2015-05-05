@@ -14,6 +14,16 @@ angular.module('split.controllers', ['split.services'])
     });
     $rootScope.enterReceiverMode = function () {
       $scope.modal.show();
+
+      $rootScope.receiverNumber = '0.00';
+
+      $rootScope.socket.on('item', function (data) {
+        if ($rootScope.username === data.username) {
+          $rootScope.receiverNumber = data.amount;
+          $rootScope.$digest();
+        }
+      });
+
     };
     $rootScope.exitReceiverMode = function () {
       $scope.modal.hide();
@@ -95,10 +105,35 @@ angular.module('split.controllers', ['split.services'])
     };
   })
 
-  .controller('ScanReceiptCtrl', function ($scope, Camera) {
+  .controller('ScanReceiptCtrl', function ($scope, Camera, $rootScope, $state) {
+
+    dragula([single1], { removeOnSpill: true }).on('remove', function (el) {
+
+      console.log(el.innerHTML);
+
+      if (el.innerHTML.indexOf('Tea') !== -1) {
+        $rootScope.socket.emit('ice tea', { username: $rootScope.username });
+        navigator.notification.alert('Iced Tea - $3.99 sent to Cassidy!', function () {
+
+        }, 'Amount submitted', 'OK');
+      } else {
+        $rootScope.socket.emit('calamari', { username: $rootScope.username });
+        navigator.notification.alert('Calamari - $10.79 sent to Justin!', function () {
+          $state.transitionTo('tab.pay');
+        }, 'Amount submitted', 'OK');
+      }
+
+    });
+
     var canvas = document.getElementById('receipt-image');
     canvas.width = window.innerWidth - 2;
     canvas.height = window.innerHeight;
+
+    $scope.isListVisible = false;
+
+    $scope.doneScanning = function () {
+      $scope.isListVisible = true;
+    };
 
     $scope.scanReceipt = function () {
       Camera.getPicture({
@@ -111,11 +146,59 @@ angular.module('split.controllers', ['split.services'])
         var canvas = document.getElementById('receipt-image');
         var context = canvas.getContext('2d');
         var receiptImage = new Image();
+        var drag = false;
+        var rect = {};
+        var touch;
+        var newImageHeight;
+
         receiptImage.onload = function () {
-          var newImageHeight = (canvas.width * receiptImage.height) / receiptImage.width;
+          newImageHeight = (canvas.width * receiptImage.height) / receiptImage.width;
           context.drawImage(receiptImage, 0, 0, receiptImage.width, receiptImage.height, 0, 0, canvas.width, newImageHeight);
+
+          $scope.$digest();
         };
         receiptImage.src = imageURI;
+
+        canvas.addEventListener('touchstart', handleTouch, false);
+        canvas.addEventListener('touchmove', handleTouch, false);
+        canvas.addEventListener('touchleave', handleEnd, false);
+        canvas.addEventListener('touchend', handleEnd, false);
+
+        function handleTouch(event) {
+          if (event.targetTouches.length === 1) {
+            touch = event.targetTouches[0];
+
+            if (event.type == 'touchmove') {
+              if (drag) {
+                rect.w = touch.pageX - rect.startX;
+                rect.h = touch.pageY - rect.startY;
+                draw();
+              }
+            } else {
+              rect.startX = touch.pageX;
+              rect.startY = touch.pageY;
+              drag = true;
+            }
+          }
+        }
+
+        function handleEnd(event) {
+          drag = false;
+//    saveRegion(imgObj);
+        }
+
+        function draw() {
+          drawImageOnCanvas();
+          context.strokeStyle = 'green';
+          context.strokeRect(rect.startX, rect.startY - 90, rect.w, rect.h);
+          context.fillStyle = 'rgba(0, 100, 255, 0.1)';
+          context.fillRect(rect.startX, rect.startY - 90, rect.w, rect.h);
+        }
+
+        function drawImageOnCanvas() {
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          context.drawImage(receiptImage, 0, 0, receiptImage.width, receiptImage.height, 0, 0, canvas.width, newImageHeight);
+        }
 
       }, function (err) {
         console.err(err);
@@ -123,9 +206,18 @@ angular.module('split.controllers', ['split.services'])
     };
   })
 
-  .controller('PayCtrl', function ($scope) {
+  .controller('PayCtrl', function ($scope, $http) {
+
+    $scope.isCharged = false;
 
     $scope.chargeFriends = function () {
+
+      $http({
+        method: 'GET',
+        url: 'http://104.245.38.179:3000/charge'
+      });
+
+      $scope.isCharged = true;
 
     };
 

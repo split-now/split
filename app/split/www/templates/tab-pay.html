@@ -9,9 +9,12 @@
         </div>
       </div>
       <div class="item item-body">
-        <button class="button button-block button-royal" ng-click="chargeFriends()">
+        <button class="button button-block button-royal" ng-click="chargeFriends()" ng-show="!isCharged">
           Charge Friends
         </button>
+        <div ng-show="isCharged">
+          Payment processed! Thanks!!
+        </div>
       </div>
     </div>
 
